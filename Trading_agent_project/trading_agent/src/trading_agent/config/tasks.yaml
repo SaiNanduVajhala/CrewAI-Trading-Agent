@@ -1,0 +1,48 @@
+search_task:
+  description: >-
+    Use SerperDevTool to search for US financial market news from the last hour.
+    Focus on breaking news affecting major indices, earnings reports,
+    and market-moving events. Search for "US financial news today", 
+    "stock market breaking news". Limit tool calls to 5 per minute, responses to 600 tokens per minute.
+  expected_output: >-
+    Comprehensive search results with titles, and content snippets
+    from the last hour of US financial market news. 3 most impactful headlines, with metadata.
+  rpm_limit: 5
+  tpm_limit: 600
+
+summary_task:
+  description: >-
+    Create a financial summary under 500 words based on search results.
+    Focus on most market-impactful news, include specific numbers and percentages,
+    use professional language, organize by priority.
+  expected_output: >-
+    Professional financial summary under 500 words highlighting major
+    market developments with clear structure. tpm_limit: 500
+
+formatting_task:
+  description: >-
+    Format the summary with markdown and add 2 relevant Yahoo Finance chart URLs,
+    e.g. [https://finance.yahoo.com/chart/%5EGSPC](https://finance.yahoo.com/chart/%5EGSPC) for S&P 500.
+    Place charts logically, provide chart descriptions. Do not exceed 300 tokens in formatting output.
+  expected_output: >-
+    Markdown summary and exactly 2 financial charts, with titles, URLs, and descriptions. tpm_limit=300
+
+translating_task:
+  description: >-
+    Translate the formatted summary into Hindi, preserving markdown and financial terms,
+    chart URLs and descriptions unchanged. keeping token usage within original bounds.
+  expected_output: >-
+    Translation in Hindi that maintains markdown formatting and chart URLs. tpm_limit: 300
+
+send_task:
+  description: >-
+    run and use sendtemp.py to send the Hindi version automatically which sends the formatted Hindi summary (04_translate.md)
+    to the target channel specified by TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.
+    Ensure markdown formatting is preserved and no cURL commands are generated.
+    Operate respecting the tpm (100) and rpm (1) rate limits.
+  expected_output: >-
+    Hindi summary (from 04_translate.md) posted automatically to Telegram via Bot token, with markdown formatting preserved,
+    no cURL instructions generated, under specified tpm and rpm limits.
+  rpm_limit: 1
+  tpm_limit: 100
+
