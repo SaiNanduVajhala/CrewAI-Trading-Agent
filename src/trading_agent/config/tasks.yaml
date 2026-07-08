@@ -1,0 +1,60 @@
+search_task:
+  description: >
+    Search for the most important US financial market news from the last hour.
+    Focus on major indices like S&P 500, Nasdaq, and significant market movers.
+    Limit to top 3 most impactful headlines to minimize redundancy.
+  expected_output: >
+    A list of the top 3 financial news headlines with brief descriptions,
+    focusing on market-moving events for major US indices.
+
+summary_task:
+  description: >
+    Create a concise financial market summary under 500 words based on search results.
+    Only include events with clear, major market impact.
+    Ignore minor news and focus on actionable insights.
+    Mention specific indices, stocks, or sectors that will need visual representation.
+  expected_output: >
+    A well-structured summary highlighting key market movements,
+    major index performance, and significant trading activity.
+
+formatting_task:
+  description: >
+    Format the summary with proper markdown structure and embed 2 relevant financial charts.
+    
+    MANDATORY IMAGE REQUIREMENTS:
+    1. Identify 2 key financial topics from the summary (e.g., S&P 500, Nasdaq)
+    2. Use download_financial_chart tool to get relevant charts for these topics
+    3. Use embed_image_in_markdown tool to convert images to base64 embedded format
+    4. Place first image after the introduction/headline section
+    5. Place second image after the main analysis section
+    6. Images MUST be embedded as base64 data, NOT external links
+    
+    Structure should be:
+    - Clear markdown headers
+    - Bullet points for key information
+    - Strategic image placement
+    - Professional formatting
+  expected_output: >
+    A properly formatted markdown document with embedded base64 images,
+    headers, bullet points, and visual charts integrated into the content flow.
+
+translating_task:
+  description: >
+    Translate the formatted summary into {language} while preserving:
+    - All markdown formatting
+    - Embedded base64 images
+    - Financial terminology accuracy
+    - Document structure
+    Keep within token limits and maintain visual elements.
+  expected_output: >
+    {language} translation of the summary with preserved formatting and embedded images,
+    maintaining professional financial communication standards.
+
+send_task:
+  description: >
+    Send the translated summary to the Telegram channel using the provided Telegram sending tool.
+    Ensure embedded images are parsed from the file, decoded, and transmitted as actual photo attachments.
+    Use minimal payload and efficient resource usage.
+  expected_output: >
+    Confirmation of successful message delivery to the Telegram channel
+    with actual attached images and formatted text content.

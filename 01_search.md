@@ -1,0 +1,3 @@
+1. S&P 500, Nasdaq close sharply higher as Broadcom rallies - The S&P 500 and Nasdaq ended sharply higher on Monday, with Broadcom and other chip manufacturers leading the gain. 
+2. Stock market today: S&P 500, Nasdaq, Dow futures trade flat with Iran and - US markets are expected to open flat with the S&P 500, Nasdaq, and Dow futures trading near unchanged. 
+3. U.S. Stock Market Today - DOW, NASDAQ, S&P - U.S. Stock Market Today; DOW. 52,900.07. +594.83; NASDAQ. 25,832.67. -207.36; S&P. 7,483.24. +0.01.
