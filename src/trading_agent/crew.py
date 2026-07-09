@@ -15,13 +15,35 @@ from io import BytesIO
 from PIL import Image
 import hashlib
 
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, task, crew
 from crewai_tools import SerperDevTool
 from crewai.tools import tool
 import litellm
 
-logging.basicConfig(level=logging.INFO)
+# Configure logging for the trading_agent package logger
+package_logger = logging.getLogger("trading_agent")
+package_logger.setLevel(logging.INFO)
+
+# Remove any existing file handlers for trading_agent.log to avoid duplicates
+for handler in list(package_logger.handlers):
+    if isinstance(handler, logging.FileHandler) and 'trading_agent.log' in getattr(handler, 'baseFilename', ''):
+        try:
+            handler.close()
+            package_logger.removeHandler(handler)
+        except Exception:
+            pass
+
+try:
+    log_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'trading_agent.log')
+    file_handler = logging.FileHandler(log_file_path, encoding='utf-8')
+    file_handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    package_logger.addHandler(file_handler)
+except Exception as e:
+    print(f"Failed to set up file logging: {e}")
+
 logger = logging.getLogger(__name__)
 
 # Define tools as standalone functions with @tool decorator
@@ -277,10 +299,32 @@ class TradingAgentCrew:
     tasks_config = 'config/tasks.yaml'
 
     def __init__(self):
-        # Use llama-3.1-8b-instant to avoid OpenAI quota errors and Groq 70b daily rate limits
-        self.primary_llm = "groq/llama-3.1-8b-instant"
-        self.secondary_llm = "groq/llama-3.1-8b-instant"
-        logger.info("Using Groq llama-3.1-8b-instant models to avoid daily rate limits")
+        # Dynamically select model based on available environment API keys
+        if os.getenv("GEMINI_API_KEY"):
+            # Set rate limit to stay within the Gemini Pro free tier requests-per-minute threshold
+            self.primary_llm = LLM(
+                model="gemini/gemini-2.5-flash",
+                rate_limit_per_minute=2
+            )
+            self.secondary_llm = LLM(
+                model="gemini/gemini-2.5-flash",
+                rate_limit_per_minute=2
+            )
+            logger.info("Using Gemini gemini-2.5-flash models with rate limiting (2 RPM)")
+        elif os.getenv("OPENAI_API_KEY"):
+            self.primary_llm = LLM(model="openai/gpt-4o-mini")
+            self.secondary_llm = LLM(model="openai/gpt-4o-mini")
+            logger.info("Using OpenAI gpt-4o-mini models")
+        else:
+            self.primary_llm = LLM(
+                model="groq/llama-3.1-8b-instant",
+                rate_limit_per_minute=10
+            )
+            self.secondary_llm = LLM(
+                model="groq/llama-3.1-8b-instant",
+                rate_limit_per_minute=10
+            )
+            logger.info("Using Groq llama-3.1-8b-instant models with rate limiting (10 RPM)")
 
     @agent
     def search_agent(self):
@@ -386,15 +430,25 @@ class TradingAgentCrew:
         )
 
     def test_network(self):
+        # Determine host to test based on available keys
+        if os.getenv("GEMINI_API_KEY"):
+            host = "generativelanguage.googleapis.com"
+            url = f"https://{host}"
+        elif os.getenv("OPENAI_API_KEY"):
+            host = "api.openai.com"
+            url = f"https://{host}"
+        else:
+            host = "api.groq.com"
+            url = f"https://{host}"
+
         try:
-            ip = socket.gethostbyname("api.groq.com")
-            logger.info(f"DNS resolved api.groq.com to {ip}")
-            resp = requests.get("https://api.groq.com", timeout=5)
-            resp.raise_for_status()
-            logger.info("Network connectivity to api.groq.com is good")
+            ip = socket.gethostbyname(host)
+            logger.info(f"DNS resolved {host} to {ip}")
+            resp = requests.get(url, timeout=5)
+            logger.info(f"Network connectivity to {host} is good")
             return True
         except Exception as e:
-            logger.error(f"Network connectivity test failed: {e}")
+            logger.error(f"Network connectivity test to {host} failed: {e}")
             return False
 
     def run(self, inputs: Dict = None):
@@ -434,9 +488,9 @@ def run():
         logger.error("Missing environment variable: SERPER_API_KEY")
         return {"status": "error", "message": "Missing environment variable: SERPER_API_KEY"}
 
-    if not os.getenv("GROQ_API_KEY") and not os.getenv("OPENAI_API_KEY"):
-        logger.error("Missing environment variables: Either GROQ_API_KEY or OPENAI_API_KEY must be set")
-        return {"status": "error", "message": "Missing environment variables: Either GROQ_API_KEY or OPENAI_API_KEY must be set"}
+    if not os.getenv("GROQ_API_KEY") and not os.getenv("OPENAI_API_KEY") and not os.getenv("GEMINI_API_KEY"):
+        logger.error("Missing environment variables: Either GROQ_API_KEY, OPENAI_API_KEY, or GEMINI_API_KEY must be set")
+        return {"status": "error", "message": "Missing environment variables: Either GROQ_API_KEY, OPENAI_API_KEY, or GEMINI_API_KEY must be set"}
 
     agent = TradingAgentCrew()
     results = agent.run()

@@ -1,34 +1,9 @@
-**Market Summary - June 2024**
+The financial markets closed with a mixed performance as investors digested a series of economic data and Federal Reserve commentary, which collectively tempered expectations for imminent interest rate cuts. The **S&P 500 [Chart: S&P 500 Performance]** fell 0.4%, ending its multi-week winning streak, mirrored by the **Nasdaq Composite [Chart: Nasdaq Composite Performance]** which also declined by 0.5%. In contrast, the **Dow Jones Industrial Average [Chart: Dow Jones Performance]** edged up 0.1%, while small-cap stocks, as represented by the **Russell 2000 [Chart: Russell 2000 Performance]**, saw a modest gain of 0.4%.
 
-Market Overview:
-The US stock market experienced mixed trading days in June 2024, with significant fluctuations in major indices and sector-specific movements. This summary focuses on major events, highlighting actionable insights and providing visual representations where necessary.
+A primary driver for the dampened sentiment was the consistent message from various Federal Reserve officials reinforcing a "higher for longer" interest rate outlook. This perspective was further supported by unexpectedly strong initial jobless claims, which fell to 207,000, signaling a resilient labor market. While the Consumer Price Index (CPI) showed a slightly cooler-than-expected increase of 0.2%, producer prices (PPI) came in hotter at 0.5%, creating a mixed inflation picture that still suggests underlying price pressures.
 
-**Key Market Moves:**
+Sectoral performance reflected this cautious environment, with growth-oriented sectors experiencing declines. **Information Technology [Chart: S&P 500 Sector Performance]**, Consumer Discretionary, and Communication Services were among the weakest, each dropping over 1%. Conversely, defensive and commodity-linked sectors demonstrated strength, with **Energy [Chart: S&P 500 Sector Performance]** soaring 1.5% and Utilities gaining 1.1%. Financials and Materials also posted solid advances.
 
-1. **S&P 500 and Nasdaq Close Sharply Higher**: On [Date], the S&P 500 (Chart 1) and Nasdaq (Chart 2) closed sharply higher, driven by a rally in Broadcom (AVGO) and other chip manufacturers. This surge can be attributed to the sector's resilience in the face of macroeconomic uncertainty.
+Geopolitical tensions in the Middle East significantly impacted commodity markets. **Crude oil (WTI) [Chart: Crude Oil Price]** surged 5.9% to $87.05 per barrel, while **Gold [Chart: Gold Price]**, a traditional safe-haven asset, jumped 5.5% to $2,088 per ounce. The US Dollar Index (DXY) also strengthened by 0.7%, reflecting a flight to safety and higher US yields despite a slight dip in Treasury yields themselves.
 
-[Insert Chart 1: S&P 500]
-[Insert Chart 2: Nasdaq]
-
-2. **Flat Opening: S&P 500, Nasdaq, and Dow Futures**: On another day, the S&P 500, Nasdaq (Chart 3), and Dow futures traded flat, with investors awaiting cues from Iran and other global events.
-
-[Insert Chart 3: Nasdaq]
-
-3. **Mixed Performances Across Indices**:
-The Dow Jones Industrial Average closed at 52,900.07 (+594.83), while the S&P 500 (Chart 4) and the Nasdaq (Chart 5) closed at 7,483.24 (+0.01) and 25,832.67 (-207.36), respectively.
-
-[Insert Chart 4: S&P 500]
-[Insert Chart 5: Nasdaq]
-
-**Sector Analysis:**
-
-* **Semiconductor and Tech Sectors**: Broadcom's rally led the gain in the semiconductor sector, while tech giants contributed to the overall market movement.
-* **Energy and Financial Sectors**: These sectors traded relatively flat, with energy companies sensitive to global events and financial institutions navigating the market's uncertainty.
-
-**Actionable Insights:**
-
-1. **Sector Rotation**: The market's focus on tech and semiconductor sectors signals potential growth opportunities in these areas.
-2. **Risk Management**: Investors should closely monitor global events, such as developments in Iran, to adjust their risk management strategies.
-3. **Sector-Specific Trading**: Investors can explore trading opportunities in the tech and semiconductor sectors, considering the sector-specific movements.
-
-By focusing on major events and sector-specific performance, this summary provides actionable insights for investors navigating the US stock market. By analyzing the market's movements and sector trends, investors can make more informed decisions and adjust their investment strategies accordingly.
+Overall, the market is re-evaluating the timeline for potential rate cuts amidst ongoing inflationary pressures, a tight labor market, and elevated geopolitical risks, leading to increased volatility and a rotation away from growth stocks towards value and defensive plays.
